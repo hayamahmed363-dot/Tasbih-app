@@ -40,3 +40,33 @@ class _TasbihHomeState extends State<TasbihHome>
   int count = 0, total = 0, round = 1;
   static const target = 100;
   bool vibOn = true;
+late AnimationController _ctrl;
+  late Animation<double> _scale;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 130));
+    _scale = Tween(begin: 1.0, end: 0.91).animate(
+        CurvedAnimation(parent: _ctrl, curve: Curves.easeInOut));
+    _loadState();
+  }
+
+  Future<void> _loadState() async {
+    final p = await SharedPreferences.getInstance();
+    setState(() {
+      count = p.getInt('count') ?? 0;
+      total = p.getInt('total') ?? 0;
+      round = p.getInt('round') ?? 1;
+      vibOn = p.getBool('vibOn') ?? true;
+    });
+  }
+
+  Future<void> _saveState() async {
+    final p = await SharedPreferences.getInstance();
+    await p.setInt('count', count);
+    await p.setInt('total', total);
+    await p.setInt('round', round);
+    await p.setBool('vibOn', vibOn);
+  }
