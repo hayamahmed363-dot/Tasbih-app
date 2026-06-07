@@ -1,74 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_overlay_window/flutter_overlay_window.dart';
 
 void main() {
   runApp(const TasbihApp());
 }
 
+@pragma('vm:entry-point')
+void overlayMain() {
+  runApp(const OverlayApp());
+}
+
 const kGold = Color(0xFFD4AF37);
 const kBg = Color(0xFF080808);
 
-class TasbihApp extends StatelessWidget {
-  const TasbihApp({super.key});
+class OverlayApp extends StatelessWidget {
+  const OverlayApp({super.key});
   @override
-  Widget build(BuildContext context) => MaterialApp(
+  Widget build(BuildContext context) => const MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: const TasbihHome(),
+    home: OverlayWidget(),
   );
 }
 
-class TasbihHome extends StatefulWidget {
-  const TasbihHome({super.key});
+class OverlayWidget extends StatefulWidget {
+  const OverlayWidget({super.key});
   @override
-  State<TasbihHome> createState() => _TasbihHomeState();
+  State<OverlayWidget> createState() => _OverlayWidgetState();
 }
 
-class _TasbihHomeState extends State<TasbihHome> {
+class _OverlayWidgetState extends State<OverlayWidget> {
   int count = 0;
-
-  void _tap() => setState(() => count++);
-  void _reset() => setState(() => count = 0);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: kBg,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('$count',
-              style: const TextStyle(
-                fontSize: 100,
-                color: kGold,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 40),
-            GestureDetector(
-              onTap: _tap,
-              child: Container(
-                width: 200, height: 200,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: kGold, width: 3),
-                  color: kBg,
-                ),
-                child: const Center(
-                  child: Text('اضغط',
-                    style: TextStyle(color: kGold, fontSize: 24)),
-                ),
-              ),
-            ),
-            const SizedBox(height: 40),
-            TextButton(
-              onPressed: _reset,
-              child: const Text('إعادة',
-                style: TextStyle(color: kGold, fontSize: 18)),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+    return Material(
+      color: Colo
