@@ -31,7 +31,8 @@ class OverlayWidget extends StatefulWidget {
 class _OverlayWidgetState extends State<OverlayWidget> {
   int count = 0;
 
-  @override
+@override
   Widget build(BuildContext context) {
     return Material(
-      color: Colo
+      color: Colors.transparent,
+      child: GestureDetector(
